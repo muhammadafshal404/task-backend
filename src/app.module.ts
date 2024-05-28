@@ -8,6 +8,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { SequelizeOptions } from 'sequelize-typescript';
 import { UsersModule } from './modules/user/users.module';
 import { CategoryModule } from './modules/category/category.module';
+import { CarModule } from './modules/car/car.module';
 @Module({
   imports: [
     AuthModule,
@@ -17,6 +18,7 @@ import { CategoryModule } from './modules/category/category.module';
       configuration().database as unknown as SequelizeOptions,
     ),
     CategoryModule,
+    CarModule,
   ],
   controllers: [AppController],
   providers: [AppService],

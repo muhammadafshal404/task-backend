@@ -1,12 +1,17 @@
-import { CategoryModel } from '../model';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
+import { Sequelize } from 'sequelize-typescript';
+import { CategoryModel } from '../model/category.model';
+import { CarModel } from 'src/modules/car/models/car.model';
+import { CarService } from 'src/modules/car/service/car.service';
 
 @Injectable()
 export class CategoryService {
   constructor(
     @InjectModel(CategoryModel)
     private categoryModel: typeof CategoryModel,
+    private carService: CarService,
+    private sequelize: Sequelize,
   ) {}
   async createCatory(body) {
     return await this.categoryModel.create(body);
@@ -21,10 +26,24 @@ export class CategoryService {
   }
 
   async deleteCategory(id) {
-    return await this.categoryModel.destroy({ where: { id } });
+    const transaction = await this.sequelize.transaction();
+    try {
+      await this.categoryModel.destroy({ where: { id }, transaction });
+      await this.carService.deleteCarOnCategoryDeletion(id, transaction);
+      await transaction?.commit();
+      return;
+    } catch (err) {
+      await transaction?.rollback();
+      throw new Error(err);
+    }
   }
 
   async getCategory(id) {
-    return await this.categoryModel.findOne({ where: { id } });
+    return await this.categoryModel.findOne({
+      where: { id },
+      include: {
+        model: CarModel,
+      },
+    });
   }
 }

@@ -1,4 +1,5 @@
-import { Model, DataType, Column, Table } from 'sequelize-typescript';
+import { Model, DataType, Column, Table, HasMany } from 'sequelize-typescript';
+import { CarModel } from 'src/modules/car/models/car.model';
 
 @Table({ tableName: 'categories' })
 export class CategoryModel extends Model<CategoryModel> {
@@ -31,4 +32,7 @@ export class CategoryModel extends Model<CategoryModel> {
     type: DataType.DATE,
   })
   deletedAt: Date;
+
+  @HasMany(() => CarModel)
+  cars: CarModel[];
 }
