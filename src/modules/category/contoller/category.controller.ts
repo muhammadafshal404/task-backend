@@ -1,4 +1,66 @@
-import { Controller } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  UseGuards,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
+import { createCategoryDto } from '../dto';
+import { CategoryService } from '../service/category.service';
+import { JwtAuthGuard } from 'src/modules/auth/jwt-auth.guard';
 
+@UseGuards(JwtAuthGuard)
+@UsePipes(new ValidationPipe())
 @Controller('category')
-export class CategoryController {}
+export class CategoryController {
+  constructor(private categoryService: CategoryService) {}
+  @Post('/')
+  async createCategory(@Body() body: createCategoryDto) {
+    try {
+      return await this.categoryService.createCatory(body);
+    } catch (err) {
+      throw new Error(err);
+    }
+  }
+
+  @Patch('/:id')
+  async updateCategory(@Body() body: createCategoryDto, @Param() { id }) {
+    try {
+      return await this.categoryService.updateCategory(body, id);
+    } catch (err) {
+      throw new Error(err);
+    }
+  }
+
+  @Get('/')
+  async getCategories() {
+    try {
+      return await this.categoryService.getCategories();
+    } catch (err) {
+      throw new Error(err);
+    }
+  }
+
+  @Get('/:id')
+  async getCategory(@Param() { id }) {
+    try {
+      return await this.categoryService.getCategory(id);
+    } catch (err) {
+      throw new Error(err);
+    }
+  }
+
+  @Delete('/:id')
+  async deleteCategory(@Param() { id }) {
+    try {
+      return await this.categoryService.deleteCategory(id);
+    } catch (err) {
+      throw new Error(err);
+    }
+  }
+}

@@ -34,21 +34,18 @@ export class User extends Model<User> {
   }
 
   @Column({
-    field: 'updated_at',
     type: DataType.DATE,
     defaultValue: DataType.NOW,
   })
   updatedAt: Date;
 
   @Column({
-    field: 'created_at',
     type: DataType.DATE,
     defaultValue: DataType.NOW,
   })
   createdAt: Date;
 
   @Column({
-    field: 'deleted_at',
     type: DataType.DATE,
   })
   deletedAt: Date;
