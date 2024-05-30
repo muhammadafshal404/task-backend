@@ -32,6 +32,7 @@ export class CarService {
       ...find,
       include: {
         model: CategoryModel,
+        required: true,
       },
     });
   }
