@@ -4,8 +4,8 @@ import {
   Delete,
   Get,
   Param,
-  Patch,
   Post,
+  Put,
   Query,
   UseGuards,
   UsePipes,
@@ -29,7 +29,7 @@ export class CategoryController {
     }
   }
 
-  @Patch('/:id')
+  @Put('/:id')
   async updateCategory(@Body() body: createCategoryDto, @Param() { id }) {
     try {
       return await this.categoryService.updateCategory(body, id);

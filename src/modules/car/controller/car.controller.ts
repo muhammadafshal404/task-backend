@@ -6,8 +6,8 @@ import {
   Delete,
   Get,
   Param,
-  Patch,
   Post,
+  Put,
   UseGuards,
   UsePipes,
   ValidationPipe,
@@ -47,7 +47,7 @@ export class CarController {
     }
   }
 
-  @Patch('/:id')
+  @Put('/:id')
   async updateCar(@Body() body: CarDto, @Param() { id }: CarIdDto) {
     try {
       return await this.carService.updateCar(body, id);
