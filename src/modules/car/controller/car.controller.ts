@@ -8,6 +8,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
   UseGuards,
   UsePipes,
   ValidationPipe,
@@ -30,9 +31,14 @@ export class CarController {
   }
 
   @Get('/')
-  async getCars() {
+  async getCars(@Query() { perPage, pageNo, order, orderBy }) {
     try {
-      return await this.carService.getCars();
+      return await this.carService.getCars({
+        perPage,
+        pageNo,
+        orderBy,
+        order,
+      });
     } catch (err) {
       throw new Error(err);
     }
