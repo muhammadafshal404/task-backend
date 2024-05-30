@@ -10,7 +10,7 @@ export class CarDto {
   color: string;
 
   @IsNotEmpty()
-  @IsAlphanumeric()
+  @IsString()
   registration_no: string;
 
   @IsNotEmpty()

@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   UseGuards,
   UsePipes,
   ValidationPipe,
@@ -38,9 +39,9 @@ export class CategoryController {
   }
 
   @Get('/')
-  async getCategories() {
+  async getCategories(@Query() { pageNo, perPage }) {
     try {
-      return await this.categoryService.getCategories();
+      return await this.categoryService.getCategories({ pageNo, perPage });
     } catch (err) {
       throw new Error(err);
     }

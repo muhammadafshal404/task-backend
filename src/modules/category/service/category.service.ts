@@ -21,8 +21,15 @@ export class CategoryService {
     return await this.categoryModel.update(body, { where: { id } });
   }
 
-  async getCategories() {
-    return await this.categoryModel.findAll();
+  async getCategories({ pageNo, perPage }) {
+    let pagination = {};
+    if (pageNo > 0 && perPage) {
+      pagination = {
+        limit: perPage,
+        offset: (pageNo - 1) * perPage,
+      };
+    }
+    return await this.categoryModel.findAndCountAll(pagination);
   }
 
   async deleteCategory(id) {

@@ -15,7 +15,11 @@ export class CarService {
   }
 
   async getCars() {
-    return await this.carModel.findAll();
+    return await this.carModel.findAll({
+      include: {
+        model: CategoryModel,
+      },
+    });
   }
 
   async getCar(id: string) {
