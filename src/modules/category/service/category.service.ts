@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
+import { SORT_ORDER } from 'src/utils/constant';
 import { Sequelize } from 'sequelize-typescript';
 import { CategoryModel } from '../model/category.model';
 import { CarModel } from 'src/modules/car/models/car.model';
@@ -21,15 +22,20 @@ export class CategoryService {
     return await this.categoryModel.update(body, { where: { id } });
   }
 
-  async getCategories({ pageNo, perPage }) {
-    let pagination = {};
-    if (pageNo > 0 && perPage) {
-      pagination = {
-        limit: perPage,
-        offset: (pageNo - 1) * perPage,
-      };
+  async getCategories({ pageNo, perPage, orderBy }) {
+    let find = {};
+    if (orderBy) {
+      if (orderBy === SORT_ORDER.ASC) {
+        find['order'] = [['name', 'ASC']];
+      } else if (orderBy === SORT_ORDER.DESC) {
+        find['order'] = [['name', 'DESC']];
+      }
     }
-    return await this.categoryModel.findAndCountAll(pagination);
+    if (pageNo > 0 && perPage) {
+      find['limit'] = perPage;
+      find['offset'] = (pageNo - 1) * perPage;
+    }
+    return await this.categoryModel.findAndCountAll(find);
   }
 
   async deleteCategory(id) {

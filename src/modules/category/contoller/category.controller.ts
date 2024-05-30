@@ -39,9 +39,13 @@ export class CategoryController {
   }
 
   @Get('/')
-  async getCategories(@Query() { pageNo, perPage }) {
+  async getCategories(@Query() { pageNo, perPage, orderBy }) {
     try {
-      return await this.categoryService.getCategories({ pageNo, perPage });
+      return await this.categoryService.getCategories({
+        pageNo,
+        perPage,
+        orderBy,
+      });
     } catch (err) {
       throw new Error(err);
     }
