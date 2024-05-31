@@ -41,7 +41,7 @@ After login into system user can manager the Cars and Categories, Where user Can
 
 1. Create a file named .env in the root of your project directory. This file will store environment variables that your application needs to run.
 
-2. Add the following environment variables to your .env file, Add the values for following `DATABASE_USER DATABASE_PASSWORD DATABASE_HOST DATABASE_NAME  DATABASE_DIALECT DATABASE_PORT SERVER_PORT USER_EMAIL USER_PASSWORD MAIL_SERVICE USER_NAME FRONTEND_SERVER`
+2. Add the following environment variables to your .env file, Add the values for following `DATABASE_USER, DATABASE_PASSWORD, DATABASE_HOST, DATABASE_NAME,  DATABASE_DIALECT, DATABASE_PORT, SERVER_PORT, USER_EMAIL, USER_PASSWORD, MAIL_SERVICE, USER_NAME, FRONTEND_SERVER`
 
 ```
   DB_USER=DATABASE_USER
