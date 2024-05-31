@@ -32,6 +32,7 @@ export class CarModel extends Model<CarModel> {
   @Column({
     type: DataType.STRING(250),
     allowNull: false,
+    unique: true,
   })
   registration_no: string;
 

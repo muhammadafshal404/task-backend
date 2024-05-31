@@ -13,6 +13,7 @@ export class CategoryModel extends Model<CategoryModel> {
   @Column({
     type: DataType.STRING(250),
     allowNull: false,
+    unique: true,
   })
   name: string;
 

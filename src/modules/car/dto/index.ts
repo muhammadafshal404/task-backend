@@ -1,8 +1,15 @@
-import { IsAlphanumeric, IsNotEmpty, IsString, IsUUID } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsNumberString,
+  IsString,
+  IsUUID,
+  Matches,
+} from 'class-validator';
+import { MESSAGES } from 'src/utils/constant';
 
 export class CarDto {
   @IsNotEmpty()
-  @IsAlphanumeric()
+  @IsNumberString()
   model: string;
 
   @IsNotEmpty()
@@ -11,6 +18,9 @@ export class CarDto {
 
   @IsNotEmpty()
   @IsString()
+  @Matches(/^[a-zA-Z0-9\s]+$/, {
+    message: MESSAGES.ONLY_ALPHANUMERIC_VALUES_AND_SPACE_ALLOWED,
+  })
   registration_no: string;
 
   @IsNotEmpty()
