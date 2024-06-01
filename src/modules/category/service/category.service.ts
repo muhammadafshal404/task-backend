@@ -30,6 +30,8 @@ export class CategoryService {
       } else if (orderBy === SORT_ORDER.DESC) {
         find['order'] = [['name', 'DESC']];
       }
+    } else {
+      find['order'] = [['updatedAt', 'DESC']];
     }
     if (pageNo > 0 && perPage) {
       find['limit'] = perPage;

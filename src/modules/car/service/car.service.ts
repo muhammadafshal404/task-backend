@@ -23,6 +23,8 @@ export class CarService {
       } else if (order === SORT_ORDER.DESC) {
         find['order'] = [[orderBy, 'DESC']];
       }
+    } else {
+      find['order'] = [['updatedAt', 'DESC']];
     }
     if (pageNo > 0 && perPage) {
       find['limit'] = perPage;
