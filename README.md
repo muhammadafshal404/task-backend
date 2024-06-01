@@ -4,6 +4,10 @@
 
 ## Description
 
+The Project Is Created Using Nestjs.
+
+Project includes Login, Signup, Category and Car modules.
+
 On Signup User enter needs to input his/her email address and user will receive an auto-generated password on his/her email. User can login using this password.
 
 After login into system user can manager the Cars and Categories, Where user Can Add/ Edit/ Delete Categories and also Add/ Edit/ Delete Cars corresponing to categories.
